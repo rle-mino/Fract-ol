@@ -6,7 +6,7 @@
 #    By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/26 09:50:20 by rle-mino          #+#    #+#              #
-#    Updated: 2016/02/26 10:21:50 by rle-mino         ###   ########.fr        #
+#    Updated: 2016/03/18 17:56:15 by rle-mino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -193,6 +193,6 @@ clean:
 
 fclean:	clean
 	@rm -rf $(NAME)
-	@echo $(KRED)"removal" $(KRESET)"libft.a\t\t["$(KCYN)"SUCCESS"$(KRESET)"]"
+	@echo $(KRED)"removal" $(KRESET)"libft.a\t["$(KCYN)"SUCCESS"$(KRESET)"]"
 
 re: fclean $(NAME)
