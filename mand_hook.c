@@ -6,7 +6,7 @@
 /*   By: rle-mino <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/18 17:50:40 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/03/18 22:04:41 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/03/19 19:38:37 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int			mouse_func_mand(int x, int y, void *param)
 	a = param;
 	if (a->mand_zoom != 1)
 	{
-		a->set->z_r = ((double)(x - 500) / 500);
-		a->set->z_i = ((double)(y - 500) / 500);
+		a->mand->tmp_z_r = ((double)(x - 500) / 500);
+		a->mand->tmp_z_i = ((double)(y - 500) / 500);
 		restart_mandel(a);
 	}
 	return (0);
@@ -45,8 +45,6 @@ int			key_func_mand(int keycode, void *param)
 		exit(EXIT_SUCCESS);
 	else if (keycode == 49)
 		a->mand_zoom = a->mand_zoom == 1 ? 0 : 1;
-	else
-		fpf("keycode = %d\n", keycode);
 	return (0);
 }
 
@@ -58,19 +56,9 @@ int			zoom_func_mand(int button, int x, int y, void *param)
 	if (a->mand_zoom == 1)
 	{
 		if (button == 5)
-		{
-			a->set->mand_zoom_y += 0.2;
-			a->set->mand_zoom_x += 0.2;
-			a->set->mand_deca_x += ((double)(x - 500) / 500);
-			a->set->mand_deca_y += ((double)(y - 500) / 500);
-		}
+			zoom_plus_mand(a, x, y);
 		else if (button == 4)
-		{
-			a->set->mand_zoom_y -= 0.2;
-			a->set->mand_zoom_x -= 0.2;
-			a->set->mand_deca_x -= ((double)(x - 500) / 500);
-			a->set->mand_deca_y -= ((double)(y - 500) / 500);
-		}
+			zoom_min_mand(a, x, y);
 		restart_mandel(a);
 	}
 	return (0);

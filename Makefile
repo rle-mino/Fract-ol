@@ -6,7 +6,7 @@
 #    By: rle-mino <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/17 11:31:38 by rle-mino          #+#    #+#              #
-#    Updated: 2016/03/18 18:00:27 by rle-mino         ###   ########.fr        #
+#    Updated: 2016/03/19 19:28:03 by rle-mino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRC		=	main.c			\
 			fracolors.c		\
 			mandel.c		\
 			mand_hook.c		\
+			zoom.c			\
 			mandelbrot.c
 
 DOTO	=	$(SRC:.c=.o)
@@ -32,7 +33,7 @@ KWHI	=		"\033[1;37m"
 
 
 #FLAGS
-FLAGS	= -g3 -Wall -Wextra -Werror
+FLAGS	= -Ofast -Wall -Wextra -Werror
 
 #RULES
 
