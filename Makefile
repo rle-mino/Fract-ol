@@ -6,7 +6,7 @@
 #    By: rle-mino <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/17 11:31:38 by rle-mino          #+#    #+#              #
-#    Updated: 2016/03/19 19:28:03 by rle-mino         ###   ########.fr        #
+#    Updated: 2016/03/23 17:56:31 by rle-mino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRC		=	main.c			\
 			mandel.c		\
 			mand_hook.c		\
 			zoom.c			\
+			opencl_init.c	\
 			mandelbrot.c
 
 DOTO	=	$(SRC:.c=.o)
@@ -33,7 +34,7 @@ KWHI	=		"\033[1;37m"
 
 
 #FLAGS
-FLAGS	= -Ofast -Wall -Wextra -Werror
+FLAGS	= -g3 -Wall -Wextra -Werror
 
 #RULES
 
@@ -44,7 +45,7 @@ all: $(NAME)
 $(NAME): $(DOTO)
 	@make -C libft/
 	@printf "\033[1;37mCompiling\033[0m fractol"
-	@gcc $(DOTO) -lft -L ./libft -lmlx -Iincludes -framework OpenGL -framework AppKit -o $(NAME)
+	@gcc $(DOTO) -lft -L ./libft -lmlx -Iincludes -framework OpenGL -framework AppKit -framework OpenCL -o $(NAME)
 	@printf "\t[\033[0;36mSUCCESS\033[0m]\n"
 
 %.o: %.c

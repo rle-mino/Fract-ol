@@ -6,21 +6,14 @@
 /*   By: rle-mino <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 11:08:58 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/03/24 04:03:46 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/03/21 23:27:52 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# include <mlx.h>
-# include <math.h>
-# include <stdlib.h>
-# include "libft.h"
-# include <OpenCL/opencl.h>
-# include <sys/stat.h>
-# include <stdio.h>
-
+# define MAX_ITER 42
 #define DEBUG fpf("%d - %s - %s\n", __LINE__, __func__, __FILE__);
 
 typedef struct	s_mlx
@@ -28,20 +21,13 @@ typedef struct	s_mlx
 	void		*mlx;
 	void		*win;
 	void		*img;
+	char		*program_source;
 	char		*img_data;
 	int			nbit;
 	int			deca_nbit;
 	int			line;
 	int			endian;
 }				t_mlx;
-
-typedef struct	s_mlx_conv
-{
-	int			nbit;
-	int			deca_nbit;
-	int			line;
-	int			endian;
-}				t_mlx_conv;
 
 typedef struct	s_frac
 {
@@ -71,28 +57,6 @@ typedef struct	s_param
 	int			mand_zoom;
 }				t_param;
 
-typedef struct	s_ocl
-{
-	cl_platform_id			plateform_id;
-	cl_uint					plateform_count;
-	cl_int					err;
-	cl_device_id			device;
-	cl_uint					device_count;
-	cl_context				context;
-	cl_context_properties	properties[3];
-	cl_command_queue		cmd_queue;
-	cl_program				prog;
-	char					*src;
-	size_t					src_size;
-	cl_kernel				kernel;
-	cl_mem					fract;
-	cl_mem					img_data;
-	cl_mem					img;
-	size_t					global_dimension[3];
-	size_t					global_work_size;
-	size_t					local_work_size;
-}				t_ocl;
-
 enum
 {
 	ERRNO,
@@ -109,6 +73,6 @@ int				key_func_mand(int keycode, void *param);
 int				zoom_func_mand(int button, int x, int y, void *param);
 void			zoom_plus_mand(t_param *a, int x, int y);
 void			zoom_min_mand(t_param *a, int x, int y);
-t_ocl			init_open_cl(void);
+void			init_open_cl(t_mlx *set);
 
 #endif
