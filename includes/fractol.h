@@ -6,7 +6,7 @@
 /*   By: rle-mino <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 11:08:58 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/03/24 04:03:46 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/03/25 02:00:43 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,8 @@ typedef struct	s_mlx
 
 typedef struct	s_mlx_conv
 {
-	int			nbit;
 	int			deca_nbit;
 	int			line;
-	int			endian;
 }				t_mlx_conv;
 
 typedef struct	s_frac
@@ -85,10 +83,7 @@ typedef struct	s_ocl
 	char					*src;
 	size_t					src_size;
 	cl_kernel				kernel;
-	cl_mem					fract;
-	cl_mem					img_data;
-	cl_mem					img;
-	size_t					global_dimension[3];
+	cl_mem					output;
 	size_t					global_work_size;
 	size_t					local_work_size;
 }				t_ocl;

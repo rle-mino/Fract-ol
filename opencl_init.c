@@ -6,7 +6,7 @@
 /*   By: rle-mino <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/21 21:33:14 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/03/24 04:00:01 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/03/25 03:17:54 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_ocl		init_open_cl(void)
 	get_program(&ocl);
 	ocl.cmd_queue = clCreateCommandQueue(ocl.context, ocl.device, 0, &ocl.err);
 	ocl.prog = clCreateProgramWithSource(ocl.context, 1,
-			(const char **)&ocl.src, NULL, &ocl.err);//src_size
+			(const char **)&ocl.src, NULL, &ocl.err);
 	ocl.err = clBuildProgram(ocl.prog, ocl.device_count, &ocl.device,
 									NULL, NULL, NULL);
 	if (ocl.err != CL_SUCCESS)

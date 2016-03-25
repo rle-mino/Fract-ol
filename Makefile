@@ -6,7 +6,7 @@
 #    By: rle-mino <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/17 11:31:38 by rle-mino          #+#    #+#              #
-#    Updated: 2016/03/23 17:56:31 by rle-mino         ###   ########.fr        #
+#    Updated: 2016/03/24 17:11:39 by rle-mino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,6 @@ $(NAME): $(DOTO)
 	@gcc -c $(FLAGS) -I includes $< -o $@
 
 clean:
-	@make -C libft/ fclean
 	@rm -rf $(DOTO)
 
 fclean: clean

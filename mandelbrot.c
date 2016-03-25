@@ -6,7 +6,7 @@
 /*   By: rle-mino <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 23:39:11 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/03/24 06:01:42 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/03/25 03:17:27 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,14 @@ t_mlx_conv	conv_set(t_mlx *set)
 {
 	t_mlx_conv	conv;
 
-	conv.nbit = set->nbit;
 	conv.deca_nbit = set->deca_nbit;
 	conv.line = set->line;
-	conv.endian = set->endian;
 	return (conv);
 }
 
 void		free_cl_ressources(t_ocl ocl)
 {
-	clReleaseMemObject(ocl.img_data);
+	clReleaseMemObject(ocl.output);
 	clReleaseProgram(ocl.prog);
 	clReleaseKernel(ocl.kernel);
 	clReleaseCommandQueue(ocl.cmd_queue);
@@ -36,30 +34,20 @@ void		free_cl_ressources(t_ocl ocl)
 void		draw_mandel_opencl(t_mlx *set, t_frac mand)
 {
 	t_ocl		ocl;
-	t_mlx_conv	set_conv;
 
-	set_conv = conv_set(set);
 	ocl = init_open_cl();
-	ocl.local_work_size = 64;
+	(void)mand;
 	ocl.global_work_size = 1000 * 1000;
-	ocl.fract = clCreateBuffer(ocl.context,
-				CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR,
-				sizeof(t_frac), &mand, &ocl.err);
-	ocl.img_data = clCreateBuffer(ocl.context,
-				CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR,
-				sizeof(t_mlx_conv), &set_conv, &ocl.err);
-	ocl.img = clCreateBuffer(ocl.context,
-				CL_MEM_WRITE_ONLY | CL_MEM_COPY_HOST_PTR,
-				1000 * 1000, set->img_data, &ocl.err);
-	ocl.err = clSetKernelArg(ocl.kernel, 0, sizeof(ocl.fract), &ocl.fract);
-	ocl.err = clSetKernelArg(ocl.kernel, 1, sizeof(ocl.img_data),
-				&ocl.img_data);
-	ocl.err = clSetKernelArg(ocl.kernel, 2, sizeof(ocl.img), &ocl.img);
+	ocl.output = clCreateBuffer(ocl.context,
+			CL_MEM_WRITE_ONLY | CL_MEM_COPY_HOST_PTR,
+			1000 * set->line, set->img_data, &ocl.err);
+	ocl.err = clSetKernelArg(ocl.kernel, 0, sizeof(int), &set->deca_nbit);
+	ocl.err = clSetKernelArg(ocl.kernel, 1, sizeof(int), &set->line);
+	ocl.err = clSetKernelArg(ocl.kernel, 2, sizeof(cl_mem), &ocl.output);
 	ocl.err = clEnqueueNDRangeKernel(ocl.cmd_queue, ocl.kernel, 1, NULL,
-				&ocl.global_work_size, &ocl.local_work_size, 0, NULL, NULL);
-	ocl.err = clEnqueueReadBuffer(ocl.cmd_queue, ocl.img,
-			CL_TRUE, 0, 1000 * 1000, set->img_data, 0, NULL, NULL);
-	ocl.err = clFinish(ocl.cmd_queue);
+				&ocl.global_work_size, NULL, 0, NULL, NULL);
+	ocl.err = clEnqueueReadBuffer(ocl.cmd_queue, ocl.output,
+			CL_TRUE, 0, 1000 * set->line, set->img_data, 0, NULL, NULL);
 	free_cl_ressources(ocl);
 }
 
