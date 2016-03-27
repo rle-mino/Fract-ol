@@ -6,7 +6,7 @@
 /*   By: rle-mino <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/27 15:57:20 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/03/27 19:29:08 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/03/27 19:35:17 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void		restart_fract(t_param *a)
 {
 	mlx_destroy_image(a->set->mlx, a->set->img);
-	a->set->img = mlx_new_image(a->set->mlx, 1500, 1200);
+	a->set->img = mlx_new_image(a->set->mlx, 1000, 1000);
 	a->set->img_data = mlx_get_data_addr(a->set->img, &a->set->nbit,
 			&a->set->line, &a->set->endian);
 	if (a->set->gpu == 1)
@@ -32,8 +32,8 @@ int			mouse_func_fract(int x, int y, void *param)
 	a = param;
 	if (a->mand_zoom != 1)
 	{
-		a->mand->tmp_z_r = ((double)(x - 750) / 570);
-		a->mand->tmp_z_i = ((double)(y - 600) / 600);
+		a->mand->tmp_z_r = ((double)(x - 500) / 500);
+		a->mand->tmp_z_i = ((double)(y - 500) / 500);
 		restart_fract(a);
 	}
 	return (0);

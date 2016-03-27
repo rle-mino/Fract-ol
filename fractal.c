@@ -6,7 +6,7 @@
 /*   By: rle-mino <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/27 15:53:12 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/03/27 19:26:36 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/03/27 19:36:06 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ t_ocl		*draw_fract_opencl(t_mlx *set, t_frac mand)
 			ocl->global_work_size, NULL, 0, NULL, NULL);
 	ocl->err = clFinish(ocl->cmd_queue);
 	ocl->err = clEnqueueReadBuffer(ocl->cmd_queue, ocl->output,
-			CL_TRUE, 0, (1500 * set->line), set->img_data, 0, NULL, NULL);
+			CL_TRUE, 0, (1000 * set->line), set->img_data, 0, NULL, NULL);
 	return (ocl);
 }
 
 void		init_frac_set(t_mlx *set)
 {
-	set->img = mlx_new_image(set->mlx, 1500, 1200);
+	set->img = mlx_new_image(set->mlx, 1000, 1000);
 	set->img_data = mlx_get_data_addr(set->img, &set->nbit, &set->line,
 															&set->endian);
 	set->deca_nbit = set->nbit >> 3;

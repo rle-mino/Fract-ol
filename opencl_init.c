@@ -6,7 +6,7 @@
 /*   By: rle-mino <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/21 21:33:14 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/03/27 19:25:52 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/03/27 19:35:45 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ t_ocl	*init_open_cl(t_mlx *set)
 	ocl->kernel = clCreateKernel(ocl->prog, "fractal", &ocl->err);
 	ocl->output = clCreateBuffer(ocl->context,
 			CL_MEM_WRITE_ONLY,
-			(1500 * set->line), NULL, &ocl->err);
-	ocl->global_work_size[0] = 1500;
-	ocl->global_work_size[1] = 1200;
+			(1000 * set->line), NULL, &ocl->err);
+	ocl->global_work_size[0] = 1000;
+	ocl->global_work_size[1] = 1000;
 	return (ocl);
 }
