@@ -6,7 +6,7 @@
 /*   By: rle-mino <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 11:08:58 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/03/25 02:00:43 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/03/27 19:16:40 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,39 +27,36 @@ typedef struct	s_mlx
 {
 	void		*mlx;
 	void		*win;
+	int			gpu;
 	void		*img;
 	char		*img_data;
 	int			nbit;
 	int			deca_nbit;
 	int			line;
 	int			endian;
+	void		(*draw_fract)();
+	char		*frac;
 }				t_mlx;
-
-typedef struct	s_mlx_conv
-{
-	int			deca_nbit;
-	int			line;
-}				t_mlx_conv;
 
 typedef struct	s_frac
 {
 	double		x1;
 	double		y1;
-	int			x;
-	int			y;
+	int				x;
+	int				y;
 	double		x2;
 	double		y2;
 	double		c_r;
 	double		c_i;
 	double		z_r;
 	double		z_i;
-	int			i;
+	int				i;
 	double		tmp;
 	double		zoom_y;
 	double		zoom_x;
 	double		tmp_z_r;
 	double		tmp_z_i;
-	int			iter;
+	int				iter;
 }				t_frac;
 
 typedef struct	s_param
@@ -84,26 +81,31 @@ typedef struct	s_ocl
 	size_t					src_size;
 	cl_kernel				kernel;
 	cl_mem					output;
-	size_t					global_work_size;
+	size_t					global_work_size[3];
 	size_t					local_work_size;
 }				t_ocl;
 
 enum
 {
 	ERRNO,
+	USAGE,
 	MALLOR
 };
 
 int				frac_err(int flag);
 void			draw_mandel(t_mlx *set, t_frac mand);
 void			draw_colors(t_mlx *set, t_frac mand);
-void			mandel(t_mlx *set);
-void			init_mandel(t_frac *mand);
-int				mouse_func_mand(int x, int y, void *param);
-int				key_func_mand(int keycode, void *param);
-int				zoom_func_mand(int button, int x, int y, void *param);
-void			zoom_plus_mand(t_param *a, int x, int y);
-void			zoom_min_mand(t_param *a, int x, int y);
-t_ocl			init_open_cl(void);
+void			fractal(t_mlx *set);
+void			init_fract(t_frac *mand);
+int				mouse_func_fract(int x, int y, void *param);
+int				key_func_fract(int keycode, void *param);
+int				zoom_func_fract(int button, int x, int y, void *param);
+void			zoom_plus_fract(t_param *a, int x, int y);
+void			zoom_min_fract(t_param *a, int x, int y);
+t_ocl			*init_open_cl(t_mlx *set);
+t_ocl			*draw_fract_opencl(t_mlx *set, t_frac mand);
+void			*get_fract(char *fract);
+char			*get_frac_ocl(char *fract);
+void			free_cl_ressources(t_ocl *ocl);
 
 #endif

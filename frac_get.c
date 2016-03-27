@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   frac_err.c                                         :+:      :+:    :+:   */
+/*   frac_get.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rle-mino <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/17 11:18:31 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/03/27 15:25:25 by rle-mino         ###   ########.fr       */
+/*   Created: 2016/03/27 15:49:00 by rle-mino          #+#    #+#             */
+/*   Updated: 2016/03/27 16:15:48 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		frac_err(int flag)
+void		*get_fract(char *fract)
 {
-	if (flag == MALLOR)
-	{
-		ft_putendl_fd("Malloc failed", 2);
-		exit(EXIT_FAILURE);
-	}
-	if (flag == USAGE)
-	{
-		ft_putendl_fd("Usage : ./fractol [fractal] (optional)[-gpu]", 2);
-		ft_putendl_fd("Available fractals : mandelbrot(mdlb)", 2);
-		exit(EXIT_SUCCESS);
-	}
-	return (0);
+	if (!ft_strcmp("mandelbrot", fract) || !ft_strcmp("mdlb", fract))
+		return ((void*)draw_mandel);
+	else
+		return (NULL);
+}
+
+char		*get_frac_ocl(char *fract)
+{
+	if (!ft_strcmp("mandelbrot", fract) || !ft_strcmp("mdlb", fract))
+		return (ft_strdup("mandelbrot.cl"));
+	return (NULL);
 }

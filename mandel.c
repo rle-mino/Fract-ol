@@ -6,20 +6,20 @@
 /*   By: rle-mino <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 11:39:00 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/03/25 01:53:20 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/03/27 19:26:35 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void		init_mandel(t_frac *mand)
+void		init_fract(t_frac *mand)
 {
 	mand->x1 = -2.1;
 	mand->x2 = 0.6;
 	mand->y1 = -1.2;
 	mand->y2 = 1.2;
-	mand->zoom_x = 1000 / (mand->x2 - mand->x1);
-	mand->zoom_y = 1000 / (mand->y2 - mand->y1);
+	mand->zoom_x = 1500 / (mand->x2 - mand->x1);
+	mand->zoom_y = 1200 / (mand->y2 - mand->y1);
 	mand->x = -1;
 	mand->iter = 50;
 }
@@ -35,10 +35,10 @@ void		adjust_mand_val(t_frac *mand)
 
 void		draw_mandel(t_mlx *set, t_frac mand)
 {
-	while (++mand.x < 1000)
+	while (++mand.x < 1500)
 	{
 		mand.y = -1;
-		while (++mand.y < 1000)
+		while (++mand.y < 1200)
 		{
 			adjust_mand_val(&mand);
 			while (((mand.z_r * mand.z_r) + (mand.z_i * mand.z_i)) < 4 &&

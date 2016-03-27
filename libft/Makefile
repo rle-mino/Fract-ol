@@ -6,7 +6,7 @@
 #    By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/26 09:50:20 by rle-mino          #+#    #+#              #
-#    Updated: 2016/03/19 18:57:54 by rle-mino         ###   ########.fr        #
+#    Updated: 2016/03/25 14:23:10 by rle-mino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -167,12 +167,6 @@ DOTO	=		$(SRC:.c=.o)
 DOTO_PF	=		$(SRC_PF:.c=.o)
 
 
-#COLOR
-KCYN	=		"\033[0;36m"
-KRESET	=		"\033[0m"
-KRED	=		"\033[0;31m"
-KWHI	=		"\033[1;37m"
-
 #NAME
 NAME=		libft.a
 
@@ -180,19 +174,16 @@ NAME=		libft.a
 all: $(NAME)
 
 $(NAME): $(DOTO) $(DOTO_PF)
-	@ar rc $(NAME) $(DOTO) $(DOTO_PF)
-	@ranlib $(NAME)
-	@echo $(KWHI)"Compiling" $(KRESET)"libft.a\t["$(KCYN)"SUCCESS"$(KRESET)"]"
+	ar rc $(NAME) $(DOTO) $(DOTO_PF)
+	ranlib $(NAME)
 
 %.o: %.c
-	@gcc -c $(FLAGS) -I includes $< -o $@
+	gcc -c $(FLAGS) -I includes $< -o $@
 
 clean:
-	@rm -rf $(DOTO) $(DOTO_PF)
-	@echo $(KRED)"removal" $(KRESET)".o files\t["$(KCYN)"SUCCESS"$(KRESET)"]"
+	rm -rf $(DOTO) $(DOTO_PF)
 
 fclean:	clean
-	@rm -rf $(NAME)
-	@echo $(KRED)"removal" $(KRESET)"libft.a\t\t["$(KCYN)"SUCCESS"$(KRESET)"]"
+	rm -rf $(NAME)
 
 re: fclean $(NAME)

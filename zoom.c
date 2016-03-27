@@ -6,13 +6,13 @@
 /*   By: rle-mino <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 19:20:44 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/03/19 19:33:45 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/03/27 19:29:14 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	zoom_plus_mand(t_param *a, int x, int y)
+void	zoom_plus_fract(t_param *a, int x, int y)
 {
 	double	tmp_x;
 	double	tmp_y;
@@ -26,7 +26,7 @@ void	zoom_plus_mand(t_param *a, int x, int y)
 	a->mand->iter += 10;
 }
 
-void	zoom_min_mand(t_param *a, int x, int y)
+void	zoom_min_fract(t_param *a, int x, int y)
 {
 	double	tmp_x;
 	double	tmp_y;
