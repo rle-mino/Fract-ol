@@ -6,7 +6,7 @@
 /*   By: rle-mino <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 11:08:58 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/03/28 03:47:11 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/03/28 13:01:05 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct	s_mlx
 	int			endian;
 	void		(*draw_fract)();
 	char		*frac;
+	int			id;
 }				t_mlx;
 
 typedef struct	s_frac
@@ -107,7 +108,7 @@ void			zoom_min_fract(t_param *a, int x, int y);
 t_ocl			*init_open_cl(t_mlx *set);
 t_ocl			*draw_fract_opencl(t_mlx *set, t_frac mand);
 void			*get_fract(char *fract);
-char			*get_frac_ocl(char *fract);
+void			get_frac_ocl(char *fract, t_mlx *set);
 void			free_cl_ressources(t_ocl *ocl);
 
 #endif

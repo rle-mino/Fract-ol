@@ -6,7 +6,7 @@
 /*   By: rle-mino <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/28 02:44:07 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/03/28 03:31:33 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/03/28 13:20:54 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void		adjust_julia_val(t_frac *jia)
 {
-	jia->c_r = 0.285;
-	jia->c_i = 0.01;
+	jia->c_r = jia->tmp_z_r;
+	jia->c_i = jia->tmp_z_i;
 	jia->z_r = jia->x / jia->zoom_x + jia->x1;
 	jia->z_i = jia->y / jia->zoom_y + jia->y1;
 	jia->i = 0;
