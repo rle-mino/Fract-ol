@@ -6,7 +6,7 @@
 /*   By: rle-mino <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/27 15:53:12 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/03/28 13:25:47 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/03/28 22:30:46 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void		fractal(t_mlx *set)
 
 	if (!(param = (t_param *)ft_memalloc(sizeof(t_param))))
 		frac_err(MALLOR);
-	param->mand_zoom = 0;
+	param->mand_zoom = set->id == 3 ? 1 : 0;
 	init_frac_set(set);
 	param->set = set;
 	init_fract(&fract, set);
@@ -88,5 +88,6 @@ void		fractal(t_mlx *set)
 	mlx_hook(set->win, 2, 0, key_func_fract, param);
 	mlx_hook(set->win, 4, 0, zoom_func_fract, param);
 	mlx_hook(set->win, 6, 0, mouse_func_fract, param);
+	mlx_hook(set->win, 17, 0, exit_fract, param);
 	mlx_loop(set->mlx);
 }

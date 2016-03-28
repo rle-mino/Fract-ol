@@ -33,14 +33,14 @@ __kernel void       fractal(__global char   *img_data,
     index = (x * deca_nbit) + (y * line);
     if (i == iter)
     {
-        img_data[index] = 0;
-        img_data[index + 1] = 0;
-        img_data[index + 2] = 0;
+        img_data[index] = 110;
+        img_data[index + 1] = 110;
+        img_data[index + 2] = 110;
     }
     else
     {
-        img_data[index] = 0;
-        img_data[index + 1] = 0;
+        img_data[index] = 50;
+        img_data[index + 1] = 50;
         img_data[index + 2] = i * 255 / iter;
     }
 }

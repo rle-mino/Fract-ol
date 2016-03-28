@@ -6,7 +6,7 @@
 /*   By: rle-mino <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 11:08:58 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/03/28 13:01:05 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/03/28 22:30:48 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
 # include <OpenCL/opencl.h>
 # include <sys/stat.h>
 # include <stdio.h>
-
-#define DEBUG fpf("%d - %s - %s\n", __LINE__, __func__, __FILE__);
 
 typedef struct	s_mlx
 {
@@ -43,21 +41,21 @@ typedef struct	s_frac
 {
 	double		x1;
 	double		y1;
-	int				x;
-	int				y;
+	int			x;
+	int			y;
 	double		x2;
 	double		y2;
 	double		c_r;
 	double		c_i;
 	double		z_r;
 	double		z_i;
-	int				i;
+	int			i;
 	double		tmp;
 	double		zoom_y;
 	double		zoom_x;
 	double		tmp_z_r;
 	double		tmp_z_i;
-	int				iter;
+	int			iter;
 }				t_frac;
 
 typedef struct	s_ocl
@@ -97,6 +95,9 @@ enum
 int				frac_err(int flag);
 void			draw_mandel(t_mlx *set, t_frac mand);
 void			draw_julia(t_mlx *set, t_frac jia);
+void			draw_burning(t_mlx *set, t_frac burn);
+void			draw_celtic(t_mlx *set, t_frac cel);
+void			draw_druid(t_mlx *set, t_frac cel);
 void			draw_colors(t_mlx *set, t_frac mand);
 void			fractal(t_mlx *set);
 void			init_fract(t_frac *mand, t_mlx *set);
@@ -110,5 +111,6 @@ t_ocl			*draw_fract_opencl(t_mlx *set, t_frac mand);
 void			*get_fract(char *fract);
 void			get_frac_ocl(char *fract, t_mlx *set);
 void			free_cl_ressources(t_ocl *ocl);
+int				exit_fract(void *param);
 
 #endif

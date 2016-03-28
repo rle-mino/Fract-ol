@@ -6,7 +6,7 @@
 #    By: rle-mino <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/17 11:31:38 by rle-mino          #+#    #+#              #
-#    Updated: 2016/03/28 14:00:26 by rle-mino         ###   ########.fr        #
+#    Updated: 2016/03/28 22:31:14 by rle-mino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,20 +19,17 @@ SRC		=	main.c			\
 			fracolors.c		\
 			mandel.c		\
 			julia.c			\
+			burningship.c	\
+			celtic.c		\
+			druid.c			\
 			hook.c			\
 			zoom.c			\
 			opencl_init.c	\
 			frac_get.c		\
+			frac_exit.c		\
 			fractal.c
 
 DOTO	=	$(SRC:.c=.o)
-
-
-#COLOR
-KCYN	=		"\033[0;36m"
-KRESET	=		"\033[0m"
-KRED	=		"\033[0;31m"
-KWHI	=		"\033[1;37m"
 
 
 #FLAGS
@@ -53,6 +50,7 @@ $(NAME): $(DOTO)
 	gcc -c $(FLAGS) -I includes $< -o $@
 
 clean:
+	make -C libft fclean
 	rm -rf $(DOTO)
 
 fclean: clean
