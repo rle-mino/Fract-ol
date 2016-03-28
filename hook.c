@@ -6,7 +6,7 @@
 /*   By: rle-mino <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/27 15:57:20 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/03/27 19:35:17 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/03/28 03:50:01 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,15 @@ int			mouse_func_fract(int x, int y, void *param)
 
 void		move_fract(int keycode, t_frac *mand)
 {
-	if (keycode == 126)
-		mand->y1 -= 0.01;
 	if (keycode == 125)
+		mand->y1 -= 0.01;
+	if (keycode == 126)
 		mand->y1 += 0.01;
-	if (keycode == 123)
-		mand->x1 -= 0.01;
 	if (keycode == 124)
+		mand->x1 -= 0.01;
+	if (keycode == 123)
 		mand->x1 += 0.01;
+	printf("y1 = %lf - x1 = %lf\n", mand->y1, mand->x1);
 }
 
 int			key_func_fract(int keycode, void *param)
@@ -57,7 +58,11 @@ int			key_func_fract(int keycode, void *param)
 
 	a = param;
 	if (keycode == 53)
+	{
+		if (a->set->gpu == 1)
+			free_cl_ressources(a->ocl);
 		exit(EXIT_SUCCESS);
+	}
 	else if (keycode == 49)
 		a->mand_zoom = a->mand_zoom == 1 ? 0 : 1;
 	else if (keycode == 69 || keycode == 78 ||

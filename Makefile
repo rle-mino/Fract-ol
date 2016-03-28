@@ -6,7 +6,7 @@
 #    By: rle-mino <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/17 11:31:38 by rle-mino          #+#    #+#              #
-#    Updated: 2016/03/27 19:22:47 by rle-mino         ###   ########.fr        #
+#    Updated: 2016/03/28 02:56:46 by rle-mino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRC		=	main.c			\
 			frac_err.c		\
 			fracolors.c		\
 			mandel.c		\
+			julia.c			\
 			hook.c			\
 			zoom.c			\
 			opencl_init.c	\

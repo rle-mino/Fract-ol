@@ -6,7 +6,7 @@
 /*   By: rle-mino <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 11:08:58 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/03/27 19:16:40 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/03/28 03:47:11 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,6 @@ typedef struct	s_frac
 	int				iter;
 }				t_frac;
 
-typedef struct	s_param
-{
-	t_frac		*mand;
-	t_mlx		*set;
-	int			mand_zoom;
-}				t_param;
-
 typedef struct	s_ocl
 {
 	cl_platform_id			plateform_id;
@@ -85,6 +78,14 @@ typedef struct	s_ocl
 	size_t					local_work_size;
 }				t_ocl;
 
+typedef struct	s_param
+{
+	t_frac		*mand;
+	t_mlx		*set;
+	int			mand_zoom;
+	t_ocl		*ocl;
+}				t_param;
+
 enum
 {
 	ERRNO,
@@ -94,9 +95,10 @@ enum
 
 int				frac_err(int flag);
 void			draw_mandel(t_mlx *set, t_frac mand);
+void			draw_julia(t_mlx *set, t_frac jia);
 void			draw_colors(t_mlx *set, t_frac mand);
 void			fractal(t_mlx *set);
-void			init_fract(t_frac *mand);
+void			init_fract(t_frac *mand, t_mlx *set);
 int				mouse_func_fract(int x, int y, void *param);
 int				key_func_fract(int keycode, void *param);
 int				zoom_func_fract(int button, int x, int y, void *param);

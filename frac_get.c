@@ -6,7 +6,7 @@
 /*   By: rle-mino <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/27 15:49:00 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/03/27 16:15:48 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/03/28 02:56:26 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void		*get_fract(char *fract)
 {
 	if (!ft_strcmp("mandelbrot", fract) || !ft_strcmp("mdlb", fract))
 		return ((void*)draw_mandel);
+	else if (!ft_strcmp("julia", fract) || !ft_strcmp("jia", fract))
+		return ((void*)draw_julia);
 	else
 		return (NULL);
 }

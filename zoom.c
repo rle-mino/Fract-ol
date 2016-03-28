@@ -6,7 +6,7 @@
 /*   By: rle-mino <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 19:20:44 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/03/27 19:29:14 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/03/28 02:27:25 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,16 @@ void	zoom_plus_fract(t_param *a, int x, int y)
 
 	tmp_x = a->mand->zoom_x;
 	tmp_y = a->mand->zoom_y;
-	a->mand->zoom_x *= 2;
-	a->mand->zoom_y *= 2;
+	if (a->set->gpu == 1)
+	{
+		a->mand->zoom_x *= 1.3;
+		a->mand->zoom_y *= 1.3;
+	}
+	else
+	{
+		a->mand->zoom_x *= 2;
+		a->mand->zoom_y *= 2;
+	}
 	a->mand->x1 += x / tmp_x - (x / a->mand->zoom_x);
 	a->mand->y1 += y / tmp_y - (y / a->mand->zoom_y);
 	a->mand->iter += 10;
@@ -33,8 +41,16 @@ void	zoom_min_fract(t_param *a, int x, int y)
 
 	tmp_x = a->mand->zoom_x;
 	tmp_y = a->mand->zoom_y;
-	a->mand->zoom_x /= 2;
-	a->mand->zoom_y /= 2;
+	if (a->set->gpu == 1)
+	{
+		a->mand->zoom_x /= 1.3;
+		a->mand->zoom_y /= 1.3;
+	}
+	else
+	{
+		a->mand->zoom_x /= 2;
+		a->mand->zoom_y /= 2;
+	}
 	a->mand->x1 += x / tmp_x - (x / a->mand->zoom_x);
 	a->mand->y1 += y / tmp_y - (y / a->mand->zoom_y);
 	a->mand->iter -= 10;

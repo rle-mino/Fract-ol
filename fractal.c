@@ -6,7 +6,7 @@
 /*   By: rle-mino <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/27 15:53:12 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/03/27 19:36:06 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/03/28 03:54:05 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,19 @@ t_ocl		*draw_fract_opencl(t_mlx *set, t_frac mand)
 	return (ocl);
 }
 
+void		init_fract(t_frac *fract, t_mlx *set)
+{
+	(void)set;
+	fract->x1 = -2.1; //if jia : -1.37
+	fract->x2 = 0.6;
+	fract->y1 = -1.2;
+	fract->y2 = 1.2;
+	fract->zoom_x = 1000 / (fract->x2 - fract->x1);
+	fract->zoom_y = 1000 / (fract->y2 - fract->y1);
+	fract->x = -1;
+	fract->iter = 50;
+}
+
 void		init_frac_set(t_mlx *set)
 {
 	set->img = mlx_new_image(set->mlx, 1000, 1000);
@@ -63,15 +76,15 @@ void		fractal(t_mlx *set)
 	param->mand_zoom = 0;
 	init_frac_set(set);
 	param->set = set;
-	init_fract(&mand);
+	init_fract(&mand, set);
 	param->mand = &mand;
 	if (set->gpu == 1)
-		draw_fract_opencl(set, mand);
+		param->ocl = draw_fract_opencl(set, mand);
 	else
 		set->draw_fract(set, mand);
 	mlx_put_image_to_window(set->mlx, set->win, set->img, 0, 0);
 	mlx_hook(set->win, 2, 0, key_func_fract, param);
 	mlx_hook(set->win, 4, 0, zoom_func_fract, param);
-	mlx_hook(set->win, 6, 0, mouse_func_fract,  param);
+	mlx_hook(set->win, 6, 0, mouse_func_fract, param);
 	mlx_loop(set->mlx);
 }
